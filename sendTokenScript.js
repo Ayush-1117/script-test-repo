@@ -158,6 +158,11 @@ async function buyPresaleTokenWithGasFee(buyOptions, usdtToken, receiverAddress,
     }
 }
 
+exports.handler = async (event) => {
+    console.log("Lambda function executed!", event);
+    return { statusCode: 200, body: "Success" };
+};
+
 // Example Usage - Modify values as needed
 buyPresaleTokenWithGasFee(
     1, // 0 = USDT, 1 = Fiat
