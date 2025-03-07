@@ -1,0 +1,24 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: latest  # Use the latest Node.js version
+    commands:
+      - echo "Installing dependencies..."
+      - npm install  # Install Node.js dependencies
+
+  build:
+    commands:
+      - echo "Zipping Lambda function..."
+      - zip -r function.zip . -x "*.git*"
+
+  post_build:
+    commands:
+      - echo "Deploying to AWS Lambda..."
+      - aws lambda update-function-code --function-name githud-to-lambda-test --zip-file fileb://function.zip
+      - echo "Deployment completed successfully!"
+
+artifacts:
+  files:
+    - function.zip
